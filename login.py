@@ -12,14 +12,12 @@ def main():
     try:
         print("Attempting Login to ACSU Network...")
         r = requests.post("https://login.shinshu-u.ac.jp/cgi-bin/Login.cgi", data=payload, timeout=3)
-        # with open("response.log", "wb") as f:
-        #     f.write(r.content)
         if SUCESS_TEXT in r.text:
             print("Login Success!")
             exit()
         else:
             print("Login Failed!")
-            print("The ID/password you enterd seems wrong.")
+            print("The ID/password you entered seems wrong.")
             exit(1)
     
     except requests.exceptions.ConnectionError as e:
