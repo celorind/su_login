@@ -2,22 +2,25 @@
 
 import requests
 from sys import exit
+from getpass import getpass
 
 def main():
-    # id = input("ID? ")
-    # passwd = input("Password? ")
-    id = "12a3456b"
-    passwd = "blahblahblah"
+    # input params
+    # id = input("ID: ")
+    # passwd = getpass("Password: ")
+    payload = {'uid': input("ID: "), 'pwd': getpass("Password: ")}
 
-    payload = {'uid': id, 'pwd': passwd}
-    r = requests.post("http://httpbin.org/post", params=payload)
-    print(r.url)
-    #print(r.json())
-    if r.status_code == requests.codes.ok:
-        print("Login Sucess!")
-    else:
-        print("Login Failed!!")
+    try:
+        print("Attempting Login ACSU Network...")
+        r = requests.post("https://login.shinshu-u.ac.jp/cgi-bin/Login.cgi", data=payload, timeout=3)
+        with open("response.log", "wb") as f:
+            f.write(r.content)
+    except requests.exceptions.Timeout as e:
+        print("Timed out:", e)
+    except Exception as e:
+        print(e)
         exit(-1)
+
 
 if __name__ == "__main__":
     main()
