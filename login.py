@@ -7,9 +7,9 @@ from getpass import getpass
 SUCESS_TEXT = "Login Success"
 
 def main():
-    payload = {'uid': input("ID: "), 'pwd': getpass("Password: ")}
-
     try:
+        payload = {'uid': input("ID: "), 'pwd': getpass("Password: ")}
+
         print("Attempting Login to ACSU Network...")
         r = requests.post("https://login.shinshu-u.ac.jp/cgi-bin/Login.cgi", data=payload, timeout=3)
         if SUCESS_TEXT in r.text:
@@ -29,6 +29,10 @@ def main():
         print("Login Failed!")
         print("HTTP request timed out.")
         exit(3)
+
+    except KeyboardInterrupt as e:
+        print("\nAborted")
+        exit(0)
 
     except Exception as e:
         print("Login Failed!")
