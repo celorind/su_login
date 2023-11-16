@@ -17,8 +17,8 @@ def main():
             exit()
         else:
             print("Login Failed!")
-            print("The ID/password you entered seems wrong.")
             exit(1)
+            print("Incorrect ID or password!.")
     
     except requests.exceptions.ConnectionError as e:
         print("Login Failed!")
@@ -31,7 +31,7 @@ def main():
         exit(3)
 
     except KeyboardInterrupt as e:
-        print("\nAborted")
+        print("\nAbort")
         exit(0)
 
     except Exception as e:
